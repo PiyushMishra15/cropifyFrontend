@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://cropifybackend.onrender.com/api";
 
 const useOrders = () => {
   const [isLoading, setIsLoading] = useState(false);

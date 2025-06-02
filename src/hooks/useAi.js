@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api/ai"; // Adjust base URL as per your environment
+const BASE_URL = "https://cropifybackend.onrender.com/api/ai"; // Adjust base URL as per your environment
 
 const predictCrops = async (queryParams) => {
   try {

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://cropifybackend.onrender.com/api";
 
 const useReviews = () => {
   const [isLoading, setIsLoading] = React.useState(false);

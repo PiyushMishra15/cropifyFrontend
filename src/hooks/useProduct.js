@@ -3,7 +3,7 @@
 import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 
-const BASE_URL = "http://localhost:3000/api"; // Replace with your backend URL
+const BASE_URL = "https://cropifybackend.onrender.com/api"; // Replace with your backend URL
 
 const useProducts = () => {
   const getProductsByCategory = async (

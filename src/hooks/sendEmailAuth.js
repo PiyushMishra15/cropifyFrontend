@@ -6,7 +6,7 @@ import { toast, Bounce } from "react-toastify";
 const useEmailAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const baseURL = "http://localhost:3000/api"; // Change if needed
+  const baseURL = "https://cropifybackend.onrender.com/api"; // Change if needed
   axios.defaults.withCredentials = true;
 
   // SIGN UP

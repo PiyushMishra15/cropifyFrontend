@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const BASE_URL = "http://localhost:3000/api/faqs";
+const BASE_URL = "https://cropifybackend.onrender.com/api/faqs";
 
 const useFAQs = () => {
   const [isLoading, setIsLoading] = useState(false);

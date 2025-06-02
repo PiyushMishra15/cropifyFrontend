@@ -16,7 +16,7 @@ const WaitForVerification = () => {
     const interval = setInterval(async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/auth/checkVerification/${type}/${id}`
+          `https://cropifybackend.onrender.com/api/auth/checkVerification/${type}/${id}`
         );
         if (res.data.verified) {
           setVerified(true);

@@ -5,7 +5,7 @@ import axios from "axios";
 export default function PrivateRoute({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-  const baseURL = "http://localhost:3000/api"; // Change if needed
+  const baseURL = "https://cropifybackend.onrender.com/api"; // Change if needed
   const navigate = useNavigate();
 
   useEffect(() => {
