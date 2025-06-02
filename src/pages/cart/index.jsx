@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import CartCard from "../../components/CartCard";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar.jsx";
-import { toast, Bounce } from "react-toastify";
 
 function Cart() {
   const navigate = useNavigate();
