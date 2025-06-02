@@ -4,8 +4,8 @@ import FormInput from "../../components/FormInput";
 import useEmailAuth from "../../hooks/sendEmailAuth";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("oggy789@gmail.com");
+  const [password, setPassword] = useState("8112958489");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
