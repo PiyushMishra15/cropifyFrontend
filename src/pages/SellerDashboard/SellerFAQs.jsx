@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import FaqSellerSkeleton from "../../components/FaqSellerSkeleton";
 import EmptyStatetext from "../../components/EmptyStatetext";
 import useFaq from "../../hooks/useFaq";
+import useProduct from "../../hooks/useProduct"; // Import your product hook
 
 function SellerFAQs() {
   const { getFAQsBySeller, answerFAQ } = useFaq();
+  const { getProductById } = useProduct(); // Destructure your product fetch function
 
   const [openFAQ, setOpenFAQ] = useState(null);
   const [answer, setAnswer] = useState("");
@@ -38,12 +40,34 @@ function SellerFAQs() {
     setLoading(false);
   };
 
+  // Fetch FAQs and enrich them with category fetched from product API
   const fetchFAQs = async () => {
     setIsDataFetching(true);
     const answered = await getFAQsBySeller(true);
     const unanswered = await getFAQsBySeller(false);
-    setAnsweredFAQ(answered);
-    setUnansweredFAQ(unanswered);
+
+    // Cache to avoid repeated fetches for same productId
+    const productCache = new Map();
+
+    const enrichWithCategory = async (faqList) => {
+      return Promise.all(
+        faqList.map(async (faq) => {
+          if (productCache.has(faq.productId)) {
+            return { ...faq, category: productCache.get(faq.productId) };
+          }
+          const product = await getProductById(faq.productId);
+          const category = product?.category || "unknown";
+          productCache.set(faq.productId, category);
+          return { ...faq, category };
+        })
+      );
+    };
+
+    const answeredWithCategory = await enrichWithCategory(answered);
+    const unansweredWithCategory = await enrichWithCategory(unanswered);
+
+    setAnsweredFAQ(answeredWithCategory);
+    setUnansweredFAQ(unansweredWithCategory);
     setIsDataFetching(false);
   };
 
@@ -87,7 +111,7 @@ function SellerFAQs() {
                   <div className="flex items-center justify-between font-semibold text-gray-800 mb-2">
                     <span>{faq.question}</span>
                     <Link
-                      to={`/category/product/details/${faq.productId}`}
+                      to={`/category/${faq.category}/details/${faq.productId}`}
                       target="_blank"
                       className="text-xs px-3 py-1 rounded-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition"
                     >
@@ -147,7 +171,7 @@ function SellerFAQs() {
                   <div className="flex items-center justify-between font-semibold text-gray-800 mb-2">
                     <span>{faq.question}</span>
                     <Link
-                      to={`/category/product/details/${faq.productId}`}
+                      to={`/category/${faq.category}/details/${faq.productId}`}
                       target="_blank"
                       className="text-xs px-3 py-1 rounded-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition"
                     >
